@@ -1,0 +1,4 @@
+project_id = "queen-rani-rewards"
+
+[functions.register-customer]
+verify_jwt = false

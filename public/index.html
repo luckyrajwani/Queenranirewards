@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Register for Queen Rani customer rewards in Gandhidham.">
+  <title>Queen Rani | Customer Rewards</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="crown" aria-hidden="true">♛</div>
+    <div>
+      <p class="eyebrow">Gandhidham, Gujarat</p>
+      <h1>QUEEN RANI</h1>
+      <p class="tagline">Style that feels like you.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="pill">CUSTOMER REWARDS</span>
+        <h2>A little thank-you.<br><em>A lovely surprise.</em></h2>
+        <p>Register with Queen Rani for a chance to receive a special 10% discount reward. Selected customers receive a unique coupon valid for 7 days, for in-store purchases only.</p>
+      </div>
+      <div class="offer-card" aria-label="Promotion details">
+        <span>YOUR NEXT LOOK</span>
+        <strong>10<small>%</small></strong>
+        <b>OFF</b>
+        <p>For selected customers</p>
+        <div class="gold-line"></div>
+        <small>Valid 7 days · In-store only</small>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="section-heading">
+        <p class="eyebrow">JOIN THE QUEEN RANI FAMILY</p>
+        <h2>Register for rewards</h2>
+        <p>Enter your details below. Registration does not guarantee a discount; approximately 5% of eligible customers are selected each week.</p>
+      </div>
+
+      <form id="register-form">
+        <label for="full_name">Full name</label>
+        <input id="full_name" name="full_name" autocomplete="name" maxlength="100" required placeholder="Your name">
+
+        <label for="phone">WhatsApp mobile number</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="+91 98765 43210">
+        <p class="field-hint">Use a number that can receive WhatsApp messages, including country code.</p>
+
+        <label class="consent">
+          <input id="marketing_consent" name="marketing_consent" type="checkbox" required>
+          <span>I agree to receive Queen Rani promotional WhatsApp messages, including reward offers. I can opt out at any time.</span>
+        </label>
+
+        <button id="submit-btn" type="submit">Register for rewards</button>
+        <p id="status" role="status" aria-live="polite"></p>
+        <p class="legal">By registering, you agree to the promotion terms and privacy notice. The 10% offer is not guaranteed and, if awarded, is valid for 7 days from issue. Coupon is for one-time use at the physical store only. Other conditions may apply.</p>
+      </form>
+    </section>
+
+    <section class="store-note">
+      <div class="mini-crown">♛</div>
+      <div>
+        <h3>Visit us in store</h3>
+        <p>Queen Rani · Gandhidham, Kutch, Gujarat</p>
+        <p class="muted">Show your valid coupon to the store team before payment.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Queen Rani. All rights reserved.</p>
+  </footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+const form = document.getElementById("register-form");
+const statusBox = document.getElementById("status");
+const button = document.getElementById("submit-btn");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  statusBox.textContent = "";
+  statusBox.className = "";
+  const endpoint = window.QUEEN_RANI_CONFIG?.REGISTRATION_FUNCTION_URL;
+
+  if (!endpoint || endpoint.includes("YOUR_PROJECT_REF")) {
+    statusBox.textContent = "The registration service is not configured yet. Please try again later.";
+    statusBox.className = "error";
+    return;
+  }
+
+  const payload = {
+    full_name: document.getElementById("full_name").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    marketing_consent: document.getElementById("marketing_consent").checked
+  };
+
+  button.disabled = true;
+  button.textContent = "Submitting…";
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "Registration failed. Please try again.");
+    form.reset();
+    statusBox.textContent = "Thank you! Your registration is complete. Selected customers will receive a WhatsApp message.";
+    statusBox.className = "success";
+  } catch (error) {
+    statusBox.textContent = error.message || "Something went wrong. Please try again.";
+    statusBox.className = "error";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Register for rewards";
+  }
+});
+</script>
+</body>
+</html>

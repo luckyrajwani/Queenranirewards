@@ -1,0 +1,71 @@
+:root {
+  --pink: #e91e63;
+  --pink-dark: #9d174d;
+  --pink-pale: #fff0f5;
+  --gold: #c6a15b;
+  --ink: #2d1722;
+  --muted: #765d68;
+  --paper: #fffdfd;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+.site-header {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 26px 18px; text-align: left; border-bottom: 1px solid #f3dce5;
+  background: #fff;
+}
+.crown { font-size: 46px; color: var(--gold); line-height: 1; }
+h1 { font-family: Georgia, serif; letter-spacing: .16em; font-size: 25px; margin: 0; color: var(--pink-dark); }
+.eyebrow { text-transform: uppercase; letter-spacing: .15em; font-size: 11px; font-weight: 750; color: var(--pink); margin: 0 0 5px; }
+.tagline { margin: 2px 0 0; color: var(--muted); font-family: Georgia, serif; font-style: italic; }
+main { max-width: 1020px; padding: 0 22px; margin: auto; }
+.hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 40px; align-items: center; padding: 66px 0 58px; }
+.pill { display: inline-block; background: var(--pink-pale); color: var(--pink-dark); padding: 7px 12px; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 500; line-height: 1.1; font-size: clamp(34px, 5vw, 52px); margin: 18px 0; }
+h2 em { color: var(--pink); font-weight: 400; }
+.hero-copy > p { max-width: 530px; color: var(--muted); font-size: 16px; }
+.offer-card {
+  background: linear-gradient(150deg, #9d174d, #5c1234); color: white; border-radius: 18px;
+  padding: 32px 24px; text-align: center; box-shadow: 0 18px 45px #9d174d26;
+  border: 1px solid #c6a15b;
+}
+.offer-card > span { letter-spacing: .19em; font-size: 10px; }
+.offer-card strong { display: block; color: #f8dca0; font-family: Georgia, serif; font-size: 78px; line-height: 1.05; margin-top: 12px; }
+.offer-card strong small { font-size: 36px; }
+.offer-card b { letter-spacing: .3em; font-size: 15px; }
+.offer-card p { margin: 12px 0; }
+.offer-card small { font-size: 11px; }
+.gold-line { height: 1px; width: 65%; margin: 18px auto; background: #c6a15b; }
+.form-section { max-width: 650px; margin: 0 auto; padding: 38px 0 64px; border-top: 1px solid #f3dce5; }
+.section-heading { text-align: center; margin-bottom: 28px; }
+.section-heading h2 { font-size: 36px; margin: 10px 0; }
+.section-heading > p:last-child { color: var(--muted); font-size: 14px; }
+form { display: flex; flex-direction: column; }
+label:not(.consent) { font-size: 13px; font-weight: 750; margin: 14px 0 7px; }
+input:not([type=checkbox]) { width: 100%; border: 1px solid #e8cbd7; border-radius: 10px; padding: 14px 13px; font: inherit; background: white; }
+input:focus { outline: 2px solid #f6a5c2; border-color: var(--pink); }
+.field-hint { margin: 5px 0; font-size: 12px; color: var(--muted); }
+.consent { display: flex; gap: 10px; align-items: flex-start; margin: 20px 0; font-size: 13px; color: var(--muted); }
+.consent input { margin-top: 5px; accent-color: var(--pink); flex: 0 0 auto; }
+button { background: var(--pink); color: white; border: 0; border-radius: 10px; padding: 15px; font: inherit; font-weight: 800; cursor: pointer; box-shadow: 0 8px 20px #e91e6325; }
+button:hover { background: var(--pink-dark); }
+button:disabled { opacity: .65; cursor: wait; }
+#status { min-height: 20px; font-size: 14px; font-weight: 650; }
+.success { color: #187448; }
+.error { color: #b42318; }
+.legal { color: #8a737d; font-size: 11px; }
+.store-note { display: flex; align-items: center; gap: 16px; background: var(--pink-pale); padding: 22px; border-radius: 14px; margin-bottom: 48px; }
+.mini-crown { color: var(--gold); font-size: 38px; }
+.store-note h3 { font-family: Georgia, serif; margin: 0; font-size: 21px; }
+.store-note p { margin: 4px 0; }
+.muted { color: var(--muted); font-size: 13px; }
+footer { border-top: 1px solid #f3dce5; text-align: center; color: var(--muted); padding: 20px; font-size: 12px; }
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; gap: 26px; padding: 42px 0; }
+  .offer-card { max-width: 330px; width: 100%; margin: auto; }
+  h1 { font-size: 21px; }
+}
